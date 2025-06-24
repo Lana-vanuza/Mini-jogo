@@ -7,15 +7,20 @@
   <link rel="stylesheet" href="game.css" />
 </head>
 <body>
+
+  <!-- Parte de cima: jogo -->
   <div class="game-container">
-    <div class="touch-area" onclick="jump()">
-  Toque aqui para pular
-    </div>
     <div id="player"></div>
     <div id="obstacle"></div>
     <audio id="jumpSound" src="assets/jump.mp3"></audio>
     <audio id="hitSound" src="assets/hit.mp3"></audio>
   </div>
+
+  <!-- Parte de baixo: toque para pular -->
+  <div class="touch-area" onclick="jump()">
+    Toque aqui para pular
+  </div>
+
   <script src="game.js"></script>
 </body>
 </html>
