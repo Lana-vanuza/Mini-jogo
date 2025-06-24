@@ -1,66 +1,52 @@
-/* Fundo e formatação geral */
 body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #87CEEB, #ffffff);
-  font-family: sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #87CEEB, #ffffff);
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
-/* Contêiner central do jogo */
 .game-container {
-  position: relative;
-  width: 100vw;
-  max-width: 700px;
-  height: 300px;
-  background-color: #dff9fb;
-  border: 3px solid #ccc;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Personagem (player) */
 #player {
-  width: 50px;
-  height: 60px;
-  background: url('assets/avatar.png') no-repeat center center / cover;
-  position: absolute;
-  bottom: 0;
-  left: 50px;
+  width: 50px;
+  height: 60px;
+  background: url('assets/avatar.png') no-repeat center center / cover;
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
 }
 
-/* Obstáculo (moita, pedra, etc) */
 #obstacle {
-  width: 40px;
-  height: 40px;
-  background: url('assets/obstaculo.png') no-repeat center center / cover;
-  position: absolute;
-  bottom: 0;
-  left: 100%;
-  animation: moveObstacle 2s linear infinite;
+  width: 40px;
+  height: 40px;
+  background: url('assets/obstaculo.png') no-repeat center center / cover;
+  position: absolute;
+  bottom: 20px;
+  left: 100vw;
+  animation: moveObstacle 2s linear infinite;
 }
 
-/* Animação de movimento do obstáculo */
 @keyframes moveObstacle {
-  from {
-    left: 100%;
-  }
-  to {
-    left: -60px;
-  }
+  from {
+    left: 100vw;
+  }
+  to {
+    left: -60px;
+  }
 }
 
-/* Animação de pulo */
 .jump {
-  animation: jump 0.5s ease-out;
+  animation: jump 0.5s ease-out;
 }
 
 @keyframes jump {
-  0% { bottom: 0; }
-  50% { bottom: 150px; }
-  100% { bottom: 0; }
+  0% { bottom: 20px; }
+  50% { bottom: 160px; }
+  100% { bottom: 20px; }
 }
