@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini Jogo Mario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #87CEEB;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    .game {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(to top, #228B22 10%, #87CEEB 10%);
+      overflow: hidden;
+    }
+
+    .mario {
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      width: 60px;
+      height: 60px;
+      background-image: url('https://i.imgur.com/NnJd2XZ.png');
+      background-size: cover;
+    }
+
+    .pipe {
+      position: absolute;
+      bottom: 0;
+      right: -60px;
+      width: 60px;
+      height: 60px;
+      background-image: url('https://i.imgur.com/BKnsmk5.png');
+      background-size: cover;
+      animation: movePipe 2s linear infinite;
+    }
+
+    @keyframes movePipe {
+      from {
+        right: -60px;
+      }
+      to {
+        right: 100%;
+      }
+    }
+
+    .jump {
+      animation: jump 500ms ease-out;
+    }
+
+    @keyframes jump {
+      0% { bottom: 0; }
+      50% { bottom: 120px; }
+      100% { bottom: 0; }
+    }
+
+    .game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 20px 40px;
+      border-radius: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <div class="mario" id="mario"></div>
+    <div class="pipe" id="pipe"></div>
+    <div class="game-over" id="gameOver">Game Over! 😢</div>
+  </div>
+
+  <script>
+    const mario = document.getElementById('mario');
+    const pipe = document.getElementById('pipe');
+    const gameOver = document.getElementById('gameOver');
+
+    function jump() {
+      if (!mario.classList.contains('jump')) {
+        mario.classList.add('jump');
+        setTimeout(() => mario.classList.remove('jump'), 500);
+      }
+    }
+
+    document.addEventListener('keydown', jump);
+    document.addEventListener('click', jump);
+
+    const loop = setInterval(() => {
+      const pipePosition = pipe.offsetLeft;
+      const marioBottom = parseInt(window.getComputedStyle(mario).bottom);
+
+      if (pipePosition < 100 && pipePosition > 0 && marioBottom < 60) {
+        pipe.style.animation = 'none';
+        pipe.style.left = pipePosition + 'px';
+
+        gameOver.style.display = 'block';
+        clearInterval(loop);
+      }
+    }, 10);
+  </script>
+</body>
+</html>
