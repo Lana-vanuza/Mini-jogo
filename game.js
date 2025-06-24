@@ -3,35 +3,45 @@ const obstacle = document.getElementById('obstacle');
 const jumpSound = document.getElementById('jumpSound');
 const hitSound = document.getElementById('hitSound');
 
+let gameOver = false;
+
 function jump() {
-  if (!player.classList.contains('jump')) {
-    player.classList.add('jump');
-    jumpSound.currentTime = 0;
-    jumpSound.play();
-    setTimeout(() => {
-      player.classList.remove('jump');
-    }, 500);
-  }
+  if (!player.classList.contains('jump') && !gameOver) {
+    player.classList.add('jump');
+    jumpSound.currentTime = 0;
+    jumpSound.play();
+    setTimeout(() => {
+      player.classList.remove('jump');
+    }, 500);
+  }
 }
 
 function checkCollision() {
-  const playerTop = parseInt(window.getComputedStyle(player).bottom);
-  const obstacleLeft = parseInt(window.getComputedStyle(obstacle).left);
+  if (gameOver) return;
 
-  if (obstacleLeft > 40 && obstacleLeft < 90 && playerTop < 50) {
-    hitSound.play();
-    alert('Você perdeu!');
-    obstacle.style.animation = 'none';
-    obstacle.style.left = `${obstacleLeft}px`;
-  } else {
-    requestAnimationFrame(checkCollision);
-  }
+  const playerBottom = parseInt(window.getComputedStyle(player).bottom);
+  const obstacleLeft = parseInt(window.getComputedStyle(obstacle).left);
+
+  if (obstacleLeft > 40 && obstacleLeft < 90 && playerBottom < 50) {
+    hitSound.currentTime = 0;
+    hitSound.play();
+    obstacle.style.animation = 'none';
+    obstacle.style.left = `${obstacleLeft}px`;
+    gameOver = true;
+    setTimeout(() => {
+      alert('Você perdeu!');
+      location.reload(); // reinicia o jogo
+    }, 200);
+  } else {
+    requestAnimationFrame(checkCollision);
+  }
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space' || e.code === 'ArrowUp') {
-    jump();
-  }
+  if (e.code === 'Space' || e.code === 'ArrowUp') {
+    jump();
+  }
 });
 
-checkCollision();
+// Inicia verificação de colisão
+requestAnimationFrame(checkCollision);
