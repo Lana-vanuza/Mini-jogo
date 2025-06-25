@@ -29,7 +29,7 @@ function checkCollision() {
     obstacle.style.left = `${obstacleLeft}px`;
     gameOver = true;
     setTimeout(() => {
-      alert('Você perdeu!');
+      alert('💥 Você perdeu!');
       location.reload();
     }, 200);
   } else {
@@ -37,6 +37,7 @@ function checkCollision() {
   }
 }
 
+// Atalho por teclado
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.code === 'ArrowUp') {
     jump();
