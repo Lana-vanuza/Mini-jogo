@@ -1,66 +1,88 @@
 body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #87CEEB, #ffffff);
-  overflow: hidden;
-  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+.game-area {
+  flex: 1;
+  background: linear-gradient(to bottom, #87CEEB, #ffffff);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Área onde o jogo acontece */
 .game-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* Personagem */
 #player {
-  width: 50px;
-  height: 60px;
-  background: url('assets/avatar.png') no-repeat center center / cover;
-  position: absolute;
-  bottom: 200px; /* altura fixa para não sumir */
-  left: 50px;
-  transform: scaleX(-1); /* virado pra frente */
+  width: 50px;
+  height: 60px;
+  background: url('assets/avatar.png') no-repeat center center / cover;
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  transform: scaleX(-1);
 }
 
 /* Obstáculo */
 #obstacle {
-  width: 40px;
-  height: 40px;
-  background: url('assets/obstaculo.png') no-repeat center center / cover;
-  position: absolute;
-  bottom: 200px;
-  left: 100vw;
-  animation: moveObstacle 2s linear infinite;
+  width: 40px;
+  height: 40px;
+  background: url('assets/obstaculo.png') no-repeat center center / cover;
+  position: absolute;
+  bottom: 10px;
+  left: 100vw;
+  animation: moveObstacle 2s linear infinite;
 }
 
 @keyframes moveObstacle {
-  from {
-    left: 100vw;
-  }
-  to {
-    left: -60px;
-  }
+  from {
+    left: 100vw;
+  }
+  to {
+    left: -60px;
+  }
 }
 
-/* Pulo */
+/* Animação de pulo */
 .jump {
-  animation: jump 0.5s ease-out;
+  animation: jump 0.5s ease-out;
 }
 
 @keyframes jump {
-  0% { bottom: 200px; }
-  50% { bottom: 320px; }
-  100% { bottom: 200px; }
+  0% { bottom: 10px; }
+  50% { bottom: 120px; }
+  100% { bottom: 10px; }
 }
 
-/* Área de toque invisível */
-.touch-area {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
-  z-index: 10;
-  background: transparent;
+/* Área de controle (metade de baixo) */
+.control-area {
+  height: 50vh;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jump-button {
+  padding: 20px 40px;
+  font-size: 20px;
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px #aaa;
+  cursor: pointer;
+}
+
+.jump-button:active {
+  box-shadow: 0 2px #888;
+  transform: translateY(2px);
 }
