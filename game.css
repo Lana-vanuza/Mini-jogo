@@ -1,17 +1,43 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: sans-serif;
-  height: 100vh;
+}
+
+body {
   display: flex;
   flex-direction: column;
 }
 
 .game-area {
-  flex: 1;
+  height: 50%;
   background: linear-gradient(to bottom, #87CEEB, #ffffff);
   position: relative;
   overflow: hidden;
+}
+
+.control-area {
+  height: 50%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jump-button {
+  padding: 20px 40px;
+  font-size: 20px;
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px #aaa;
+  cursor: pointer;
+}
+
+.jump-button:active {
+  box-shadow: 0 2px #888;
+  transform: translateY(2px);
 }
 
 /* Área onde o jogo acontece */
@@ -61,28 +87,4 @@ body {
   0% { bottom: 10px; }
   50% { bottom: 120px; }
   100% { bottom: 10px; }
-}
-
-/* Área de controle (metade de baixo) */
-.control-area {
-  height: 50vh;
-  background-color: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.jump-button {
-  padding: 20px 40px;
-  font-size: 20px;
-  background-color: #ffcc00;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px #aaa;
-  cursor: pointer;
-}
-
-.jump-button:active {
-  box-shadow: 0 2px #888;
-  transform: translateY(2px);
 }
